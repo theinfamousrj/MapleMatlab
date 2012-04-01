@@ -1,0 +1,23 @@
+%RJ Hill
+
+clc
+clear
+
+format long
+
+theta = [0:10:90];
+lambda = [10:1:500];
+Z = 23;                     %Z-value for Vanadium
+a = 3.03;                   %a=3.03
+R = ((3*a^3)/(8*pi))^(1/3); %bcc (a^3)/2
+
+
+for i=1:9
+    G(i,:) = (4*pi*sind(theta(i))./lambda);
+    X = (((G(i,:).^2).*R.^2)/10);
+    F(i,:) = Z.*(1-X);
+    plot(1./lambda,F(i,:));
+    xlabel('1/Lambda ()');
+    ylabel('Form Factor (F)');
+    hold on
+end

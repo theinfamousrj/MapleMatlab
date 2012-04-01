@@ -1,0 +1,77 @@
+clear;
+clc;
+
+x = 1;
+y = 1;
+z = 1;
+width = 3;
+height = 9;
+length = 4;
+xw = x+width;
+yl = y+length;
+zh = z+height;
+
+type = 2;   % 0 = pcc, 
+
+p1 = [x y z];
+p2 = [x xw z];
+p3 = [xw yl z];
+p4 = [y yl z];
+
+p5 = [x y zh];
+p6 = [x xw zh];
+p7 = [xw yl zh];
+p8 = [y yl zh];
+
+axis([0 10 0 10 0 10]);
+
+% the main latice:
+
+% bottom lattice
+line([p1(1) p2(1)],[p1(2) p2(2)],[p1(3) p2(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p2(1) p3(2)],[p2(2) p3(1)],[p2(3) p3(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p3(2) p4(2)],[p3(1) p4(1)],[p3(3) p4(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p4(2) p1(2)],[p4(1) p1(1)],[p4(3) p1(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+
+%top lattice
+line([p5(1) p6(1)],[p5(2) p6(2)],[p5(3) p6(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p6(1) p7(2)],[p6(2) p7(1)],[p6(3) p7(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p7(2) p8(2)],[p7(1) p8(1)],[p7(3) p8(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p8(2) p5(2)],[p8(1) p5(1)],[p8(3) p5(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+
+%connecting lattice
+line([p1(1) p5(1)],[p1(2) p5(2)],[p1(3) p5(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p2(1) p6(1)],[p2(2) p6(2)],[p2(3) p6(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p3(2) p7(2)],[p3(1) p7(1)],[p3(3) p7(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+line([p4(2) p8(2)],[p4(1) p8(1)],[p4(3) p8(3)],'Marker','.','LineStyle','-','Color','r','LineWidth',1);
+
+%bcc lattice
+if (type == 1)
+    pbc = [((x+xw)/2) ((y+yl)/2) ((z+zh)/2)];
+    
+    line([p1(1) pbc(2)],[p1(2) pbc(1)],[p1(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p2(1) pbc(2)],[p2(2) pbc(1)],[p2(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p3(2) pbc(2)],[p3(1) pbc(1)],[p3(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p4(2) pbc(2)],[p4(1) pbc(1)],[p4(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p5(1) pbc(2)],[p5(2) pbc(1)],[p5(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p6(1) pbc(2)],[p6(2) pbc(1)],[p6(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p7(2) pbc(2)],[p7(1) pbc(1)],[p7(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p8(2) pbc(2)],[p8(1) pbc(1)],[p8(3) pbc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    
+%fcc lattice
+elseif (type == 2)
+    pfc = [((x+xw)/2) ((y+yl)/2) ((z+zh)/2)];
+    
+    %line([p1(1) p1(2)],[p1(2) pfc(1)],[p1(3) pfc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    %line([p2(1) p1(2)],[p2(2) pfc(1)],[p2(3) pfc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    %line([p5(1) p1(2)],[p5(2) pfc(1)],[p5(3) pfc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    %line([p6(1) p1(2)],[p6(2) pfc(1)],[p6(3) pfc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    
+    pfc2 = [((x+xw)/2) ((y+xw)/2) ((z+zh)/2)];
+    
+    line([p1(1) pfc(2)],[p1(2) p1(1)],[p1(3) pfc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p4(1) pfc(2)],[p1(2) p4(1)],[p4(3) pfc(3)],'Marker','.','LineStyle','-','Color','g','LineWidth',1);
+    line([p5(1) pfc(2)],[p5(2) p1(1)],[p5(3) pfc(3)],'Marker','.','LineStyle','-','Color','b','LineWidth',1);
+    line([p8(1) pfc(2)],[p1(2) p8(1)],[p8(3) pfc(3)],'Marker','.','LineStyle','-','Color','g','LineWidth',1);
+
+end

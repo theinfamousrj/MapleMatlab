@@ -1,0 +1,29 @@
+% RJ Hill
+
+clc;
+clear;
+
+%The ionic crystal used is NaF
+% Constants
+q=4.80325e-10; %in esu
+p=0.29e-10;    %in meters
+zl=0.641e-8;   %in ergs
+a=1.747;       %the madelung constant alpha
+x=[0:0.1:15];  %Array for the x-values in plot
+M=6.022e23     %avagadro's number
+ergToKcal = 1/(1e7*4.184e3); 
+
+% Equations
+c=((q.^2).*a)/(p.*zl)
+f=x.^2.*exp(-x);
+
+% Calculations
+X = FZERO('x.^2.*exp(-x)-0.0217',7)
+R=X.*p
+U=((M.*((q.^2).*a))/2.3159e-8).*(1-(1/X))   %In KCal/molecule
+
+plot(x,f);
+
+RE=((2.317e-10-R)/2.317e-10).*100
+
+UE=((Ut-215.2)/215.2).*100
